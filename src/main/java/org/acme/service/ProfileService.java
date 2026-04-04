@@ -5,8 +5,6 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.acme.model.Profile;
-import org.acme.model.Student;
-
 import java.util.List;
 
 @Dependent
@@ -16,8 +14,8 @@ public class ProfileService {
     EntityManager em;
 
     @Transactional
-    public Profile createProfile(Profile profile){
-        return em.merge(profile);
+    public void createProfile(Profile profile){
+        em.merge(profile);
     }
 
     @Transactional

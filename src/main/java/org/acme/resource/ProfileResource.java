@@ -5,10 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.model.Profile;
-import org.acme.model.Student;
 import org.acme.service.ProfileService;
-import org.acme.service.StudentService;
-
 import java.util.List;
 
 @Path("/profile")

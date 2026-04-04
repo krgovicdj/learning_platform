@@ -18,16 +18,15 @@ public class Profile {
     private String bio;
     private String experience;
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Profile profile)) return false;
+        return Objects.equals(getId(), profile.getId()) && Objects.equals(getBio(), profile.getBio()) && Objects.equals(getExperience(), profile.getExperience());
     }
 
-    public String getBio() {
-        return bio;
-    }
-
-    public String getExperience() {
-        return experience;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getBio(), getExperience());
     }
 
     public void setId(Long id) {
@@ -42,16 +41,15 @@ public class Profile {
         this.experience = experience;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Profile profile = (Profile) o;
-        return Objects.equals(id, profile.id) && Objects.equals(bio, profile.bio) && Objects.equals(experience, profile.experience);
-
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, bio, experience);
+    public String getBio() {
+        return bio;
+    }
+
+    public String getExperience() {
+        return experience;
     }
 }

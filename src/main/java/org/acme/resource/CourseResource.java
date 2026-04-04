@@ -1,5 +1,6 @@
 package org.acme.resource;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -25,6 +26,7 @@ public class CourseResource {
     @GET
     @Produces("application/json")
     @Path("/getAllCourses")
+    @RolesAllowed("admin")
     @Transactional
     public Response getAllCourses(){
         List<Course> courses = courseService.getAllCourses();

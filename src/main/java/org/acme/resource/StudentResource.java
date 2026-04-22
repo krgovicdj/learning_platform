@@ -7,7 +7,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.model.Course;
 import org.acme.model.Student;
+import org.acme.model.TimezoneInfo;
 import org.acme.service.StudentService;
+import org.acme.service.TimezoneService;
 
 import java.util.List;
 
@@ -66,6 +68,23 @@ public class StudentResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok().entity(courses).build();
+    }
+
+    @Inject
+    TimezoneService timezoneService;
+
+    @GET
+    @Path("/getTimezoneByIP")
+    @Produces(jakarta.ws.rs.core.MediaType.APPLICATION_JSON)
+    public Response getTimezoneByIP(@QueryParam("userId") Long userId) {
+        try {
+            TimezoneInfo timezoneInfo = timezoneService.getAndSaveTimezoneForUser(userId);
+            return Response.ok(timezoneInfo).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
     }
 
 }
